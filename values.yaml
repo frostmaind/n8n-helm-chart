@@ -1,0 +1,39 @@
+replicaCount: 1
+
+n8n:
+  image: n8nio/n8n
+  tag: latest
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+    limits:
+      cpu: 500m
+      memory: 1Gi
+
+postgres:
+  image: postgres:11
+  resources:
+    requests:
+      cpu: 250m
+      memory: 1Gi
+    limits:
+      cpu: 500m
+      memory: 2Gi
+
+
+postgres:
+  auth:
+    postgresUser: "postgres"
+    postgresPassword: "postgres"
+    appUser: "n8n_user"
+    appPassword: "n8n_pass"
+
+
+ingress:
+  enabled: true
+  host: "n8n.example.com"
+
+  tls:
+    enabled: true
+    clusterIssuer: "letsencrypt-prod"
